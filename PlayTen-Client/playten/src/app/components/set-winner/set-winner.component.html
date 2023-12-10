@@ -1,0 +1,21 @@
+<div>
+    <mat-form-field>
+        <mat-label>Оберіть матч</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="match">
+            <mat-option [value]="match.id" *ngFor="let match of matches">{{match?.player1 === null ? "BYE" :
+                match?.player1?.surname}} - {{match?.player2 === null ? "BYE": match?.player2?.surname}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div *ngIf="selectedValue">
+        <input matInput placeholder="Рахунок" [(ngModel)]='score'>
+    </div>
+    <div *ngIf="selectedValue">
+        <mat-radio-group [(ngModel)]="selectedPlayerId" ngDefaultControl>
+            <mat-radio-button *ngIf="getPlayer()?.player1 !== null" [value]="getPlayer()?.player1?.id">{{getPlayer()?.player1?.name}}</mat-radio-button>
+            <mat-radio-button *ngIf="getPlayer()?.player2 !== null" [value]="getPlayer()?.player2?.id">{{getPlayer()?.player2?.name}}</mat-radio-button>
+          </mat-radio-group>
+    </div>
+    <div *ngIf="selectedValue">
+        <button color="primary" mat-raised-button (click)="save()" [disabled]="score === ''">Зберегти</button>
+    </div>
+</div>

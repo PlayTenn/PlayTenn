@@ -1,0 +1,49 @@
+<div class="profile">
+  <div class="profile-details">
+    <nav class="profile-tabs" mat-tab-nav-bar [backgroundColor]="background" color="accent" [tabPanel]="tabPanel">
+      <a mat-tab-link *ngFor="let link of links" (click)="activeLink = link" [active]="activeLink == link"> {{link}}
+      </a>
+    </nav>
+    <mat-tab-nav-panel #tabPanel>
+      <div class="profile-wrapper" *ngIf="activeLink === links[0]">
+        <div *ngIf="!showSpinner" class="avatar-wrapper">
+          <mat-card class="avatar">
+            <img mat-card-image src="{{avatar}}" *ngIf="avatar">
+            <img mat-card-image src="../../../assets/default-avatar.png" *ngIf="!avatar" class="default-avatar">
+          </mat-card>
+          <div class="avatar-buttons">
+            <app-avatar (isPhotoLoaded)="reloadProfile()"></app-avatar>
+            <button mat-mini-fab color="accent" *ngIf="avatar" (click)="$event.stopPropagation(); deletePhoto()" matTooltip="Видалити фото"
+              matTooltipPosition="below">
+              <mat-icon color="warn">delete</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div *ngIf="showSpinner" class="spinner">
+          <mat-progress-spinner [mode]="spinnerMode">
+          </mat-progress-spinner>
+        </div>
+        <div class="info">
+          <mat-chip class="tennis-level-chip-wrapper" matTooltip="Tennis level" matTooltipPosition="below">
+            <div class="tennis-level-chip-content">
+              <mat-icon><span class="material-icons">sports_tennis</span></mat-icon>
+              <span>{{user?.tennisLevel?.level}}</span>
+            </div>
+          </mat-chip>
+          <mat-card class="profile-row">
+            <mat-card-content>{{user?.name}}</mat-card-content>
+          </mat-card>
+          <mat-card class="profile-row">
+            <mat-card-content>{{user?.surname}}</mat-card-content>
+          </mat-card>
+          <mat-card class="profile-row">
+            <mat-card-content>{{user?.email}}</mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab-nav-panel>
+    <mat-tab-nav-panel #tabPanel *ngIf="activeLink === links[1]">
+      Settings
+    </mat-tab-nav-panel>
+  </div>
+</div>

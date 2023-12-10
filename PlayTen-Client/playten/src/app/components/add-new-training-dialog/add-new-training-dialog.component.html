@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>Додайте нове тренування</h1>
+<div class="new-training-dialog" *ngIf="!showSpinner">
+ <form [formGroup]="training" class="new-training-content">
+  <mat-form-field appearance="outline">
+   <mat-label>Назва</mat-label>
+   <input matInput formControlName="name">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+   <mat-label>Опис</mat-label>
+   <input matInput formControlName="description">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+   <mat-label>Дата та час початку</mat-label>
+   <input matInput [ngxMatDatetimePicker]="picker1" formControlName="dateStart" placeholder="Оберіть дату початку">
+   <mat-datepicker-toggle matSuffix [for]="$any(picker1)"></mat-datepicker-toggle>
+   <ngx-mat-datetime-picker #picker1 [showSpinners]="true" [showSeconds]="false" [stepHour]="stepHour"
+    [stepMinute]="stepMinute" [color]="color"></ngx-mat-datetime-picker>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+   <mat-label>Час завершення</mat-label>
+   <input matInput [ngxMatDatetimePicker]="picker2" formControlName="dateEnd" placeholder="Оберіть дату завершення">
+   <mat-datepicker-toggle matSuffix [for]="$any(picker2)"></mat-datepicker-toggle>
+   <ngx-mat-datetime-picker #picker2 [showSpinners]="true" [showSeconds]="false" [stepHour]="stepHour"
+    [stepMinute]="stepMinute" [color]="color"></ngx-mat-datetime-picker>
+  </mat-form-field>
+  <mat-form-field>
+   <mat-label>Локація</mat-label>
+   <mat-select formControlName="placeId">
+    <mat-option *ngFor="let place of places" [value]="place.id">{{place.name}}, {{place.streetAddress}}</mat-option>
+   </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+   <mat-label>Кількість учасників</mat-label>
+   <input matInput type="number" formControlName="numberOfParticipants">
+  </mat-form-field>
+  <div class="has-balls">
+   <mat-label>Наявність м'ячів</mat-label>
+   <mat-checkbox formControlName="hasBalls"></mat-checkbox>
+  </div>
+ </form>
+ <div class="new-training-dialog-buttons" mat-dialog-actions>
+  <button mat-button color="warn" (click)="cancelClick()">Відмінити</button>
+  <button mat-flat-button cdkFocusInitial color="primary" (click)="createNewTraining()">Створити</button>
+ </div>
+</div>
+<div *ngIf="showSpinner" class="spinner">
+ <mat-progress-spinner [mode]="spinnerMode">
+ </mat-progress-spinner>
+</div>

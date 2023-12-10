@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayTen", "PlayTen\PlayTen.csproj", "{320A5B9A-7168-4C7E-960A-9A3345F6601C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayTen.DAL", "PlayTen.DAL\PlayTen.DAL.csproj", "{084D3D44-8836-4AA8-84BD-3498449EB513}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayTen.BLL", "PlayTen.BLL\PlayTen.BLL.csproj", "{C7B0B6F2-DE70-41B8-A3F5-F76601CA5CC1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{320A5B9A-7168-4C7E-960A-9A3345F6601C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{320A5B9A-7168-4C7E-960A-9A3345F6601C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{320A5B9A-7168-4C7E-960A-9A3345F6601C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{320A5B9A-7168-4C7E-960A-9A3345F6601C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{084D3D44-8836-4AA8-84BD-3498449EB513}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{084D3D44-8836-4AA8-84BD-3498449EB513}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{084D3D44-8836-4AA8-84BD-3498449EB513}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{084D3D44-8836-4AA8-84BD-3498449EB513}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7B0B6F2-DE70-41B8-A3F5-F76601CA5CC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7B0B6F2-DE70-41B8-A3F5-F76601CA5CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7B0B6F2-DE70-41B8-A3F5-F76601CA5CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7B0B6F2-DE70-41B8-A3F5-F76601CA5CC1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6B7F6DF1-995A-48FA-BD2E-3EDA67282ED6}
+	EndGlobalSection
+EndGlobal

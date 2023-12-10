@@ -1,0 +1,41 @@
+<div class="users">
+ <div class="users-details">
+  <mat-accordion multi *ngIf="!showSpinner">
+   <mat-expansion-panel class="user-expander" (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+    *ngFor="let user of users">
+    <mat-expansion-panel-header>
+     <mat-panel-title>
+      {{user?.name}} {{user?.surname}}
+      <mat-chip class="tennis-level-chip-wrapper" matTooltip="Tennis level" matTooltipPosition="below">
+       <div class="tennis-level-chip-content">
+        <mat-icon class="material-icons">sports_tennis</mat-icon>
+        <div>
+         <span>{{user?.tennisLevel?.level}}</span>
+        </div>
+       </div>
+      </mat-chip>
+     </mat-panel-title>
+     <button mat-icon-button (click)="$event.stopPropagation(); deleteUser(user)" matTooltip="Delete" matTooltipPosition="below">
+      <mat-icon color="warn">delete</mat-icon>
+     </button>
+    </mat-expansion-panel-header>
+    <mat-card class="user">
+     <mat-card-content>Email: {{user?.email}}</mat-card-content>
+    </mat-card>
+   </mat-expansion-panel>
+  </mat-accordion>
+  <div *ngIf="showSpinner" class="spinner">
+   <mat-progress-spinner [mode]="spinnerMode" color="accent">
+   </mat-progress-spinner>
+  </div>
+
+  <div *ngIf="isNoUsers" class="no-users">
+   <div>
+    <img src="../../../assets/shrekanddonkey.png">
+   </div>
+   <div class="no-users-text">
+    <h3>We don't found users, but we found Shrek with Donkey</h3>
+   </div>
+  </div>
+ </div>
+</div>

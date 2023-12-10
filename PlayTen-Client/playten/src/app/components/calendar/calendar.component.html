@@ -1,0 +1,43 @@
+<div class="calendar">
+ <div class="calendar-details">
+  <div class="calendar-header">
+   <div>
+    <button mat-button color="accent" class="btn btn-primary" mwlCalendarPreviousView [view]="view"
+     [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">Попередній</button>
+    <button mat-button color="accent" mwlCalendarToday [(viewDate)]="viewDate">
+     Поточний
+    </button>
+    <button mat-button color="accent" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+     (viewDateChange)="closeOpenMonthViewDay()">
+     Наступний
+    </button>
+   </div>
+   <div class="calendar-title">
+    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+   </div>
+   <div>
+    <div>
+     <button mat-button color="accent" (click)="setView(CalendarView.Month)"
+      [class.active]="view === CalendarView.Month">
+      Місяць
+     </button>
+     <button mat-button color="accent" (click)="setView(CalendarView.Week)"
+      [class.active]="view === CalendarView.Week">
+      Тиждень
+     </button>
+     <button mat-button color="accent" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+      День
+     </button>
+    </div>
+   </div>
+  </div>
+  <div [ngSwitch]="view">
+   <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [refresh]="refresh" [events]="events">
+   </mwl-calendar-month-view>
+   <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [refresh]="refresh" [events]="events">
+   </mwl-calendar-week-view>
+   <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [refresh]="refresh" [events]="events">
+   </mwl-calendar-day-view>
+  </div>
+ </div>
+</div>

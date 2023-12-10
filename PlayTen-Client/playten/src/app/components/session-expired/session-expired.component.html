@@ -1,0 +1,21 @@
+<div class="dialog-wrapper">
+ <mat-card>
+  <mat-card-header>
+   <mat-card-title>
+    Ваш сеанс закінчився
+   </mat-card-title>
+   <mat-card-subtitle>
+    Ви вийдете з системи через: {{subscribeTimer}}
+   </mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="../../../assets/avatar.jpg">
+  <mat-card-actions class="dialog-buttons">
+   <button mat-button color="warn" (click)="onLogoutClick()">
+    Вийти
+   </button>
+   <button mat-button color="accent" (click)="prolongLeaseExpirationTime()">
+    Keep me sign in
+   </button>
+  </mat-card-actions>
+ </mat-card>
+</div>

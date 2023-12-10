@@ -1,0 +1,53 @@
+<h1 mat-dialog-title>Додайте новий турнір</h1>
+<div class="new-tournament-dialog" *ngIf="!showSpinner">
+ <form [formGroup]="tournament" class="new-tournament-content">
+    <mat-form-field appearance="outline">
+        <mat-label>Назва</mat-label>
+        <input matInput formControlName="name">
+       </mat-form-field>
+       <mat-form-field appearance="outline">
+        <mat-label>Опис</mat-label>
+        <input matInput formControlName="description">
+       </mat-form-field>
+       <mat-form-field appearance="outline">
+        <mat-label>Дата початку</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="dateStart" placeholder="Оберіть дату початку">
+        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1 [showSpinners]="true" [color]="color"></mat-datepicker>
+       </mat-form-field>
+       <mat-form-field appearance="outline">
+        <mat-label>Дата завершення</mat-label>
+        <input matInput [matDatepicker]="picker2" formControlName="dateEnd" placeholder="Оберіть дату завершення">
+        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2 [showSpinners]="true" [color]="color"></mat-datepicker>
+       </mat-form-field>
+       <mat-form-field>
+        <mat-label>Локація</mat-label>
+        <mat-select formControlName="placeId">
+         <mat-option *ngFor="let place of places" [value]="place.id">{{place.name}}, {{place.streetAddress}}</mat-option>
+        </mat-select>
+       </mat-form-field>
+       <mat-form-field appearance="outline">
+        <mat-label>Кількість учасників</mat-label>
+        <mat-select matNativeControl formControlName="numberOfParticipants" required>
+            <mat-option value="4">4</mat-option>
+            <mat-option value="8">8</mat-option>
+            <mat-option value="16">16</mat-option>
+            <mat-option value="32">32</mat-option>
+            <mat-option value="64">64</mat-option>
+        </mat-select>
+       </mat-form-field>
+       <mat-form-field appearance="outline">
+        <mat-label>Внесок</mat-label>
+        <input matInput formControlName="price">
+       </mat-form-field>
+ </form>
+ <div class="new-tournament-dialog-buttons" mat-dialog-actions>
+  <button mat-button color="warn" (click)="cancelClick()">Відмінити</button>
+  <button mat-flat-button cdkFocusInitial color="primary" (click)="createNewTournament()">Створити</button>
+ </div>
+</div>
+<div *ngIf="showSpinner" class="spinner">
+ <mat-progress-spinner [mode]="spinnerMode">
+ </mat-progress-spinner>
+</div>

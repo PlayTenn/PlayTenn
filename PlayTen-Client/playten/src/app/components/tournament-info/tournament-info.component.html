@@ -1,0 +1,90 @@
+<div class="tournament-info">
+    <div class="tournament-info-details">
+        <mat-card *ngIf="!tournament?.tournament?.hasStarted">
+            <mat-card-header class="dialog-header">
+                <mat-card-title>{{tournament?.tournament?.name}}</mat-card-title>
+                <mat-card-subtitle style="color: black;">Опис:
+                    {{tournament?.tournament?.description}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content style="background-color: whitesmoke;">
+                <h3>Учасники</h3>
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="fullName">
+                        <th mat-header-cell *matHeaderCellDef>Повне ім'я</th>
+                        <td mat-cell *matCellDef="let participant"> {{participant.fullName}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="email">
+                        <th mat-header-cell *matHeaderCellDef>Email</th>
+                        <td mat-cell *matCellDef="let participant"> {{participant.email}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="level">
+                        <th mat-header-cell *matHeaderCellDef>Рівень гри</th>
+                        <td mat-cell *matCellDef="let participant"> {{participant.tennisLevel}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef>Поточний cтатус</th>
+                        <td mat-cell *matCellDef="let participant"> {{participant.status}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+                </mat-paginator>
+                <mat-divider></mat-divider>
+            </mat-card-content>
+        </mat-card>
+        <div *ngIf="tournament?.tournament?.hasStarted" class="matches">
+            <main>
+                <ng-container *ngFor="let round of rounds; index as i">
+                    <ul class="round round-{{i}}">
+                        <ng-container *ngFor="let match of rounds[i]; index as m">
+                            <li class="spacer">&nbsp;</li>
+
+                            <li *ngIf="i === 0 && match?.player1 === null" class="game game-top">
+                                BYE<span></span></li>
+                            <li *ngIf="i === 0 && match?.player1 !== null" class="game game-top" [ngClass]="{'winner': match?.player1Id === match?.winnerId}">
+                                <a class="winner-button" mat-button target="_blank" [ngClass]="{'winner': match?.player1Id === match?.winnerId}">{{match?.player1?.name}}
+                                    {{match?.player1?.surname}}</a>
+                                <span *ngIf="match?.player1Id === match?.winnerId">{{match?.score}}</span>
+                            </li>
+                            <li *ngIf="i !== 0" class="game game-top" [ngClass]="{'winner': match?.player1Id === match?.winnerId}">
+                                <a *ngIf="match?.player1 !== null" class="winner-button" [ngClass]="{'winner': match?.player1Id === match?.winnerId}" mat-button
+                                    target="_blank">{{match?.player1?.name}}
+                                    {{match?.player1?.surname}}</a><span *ngIf="match?.player1Id === match?.winnerId">{{match?.score}}</span>
+                                <a *ngIf="match?.player1 === null" class="winner-button" mat-button target="_blank"
+                                    (click)="openSetWinnerSheet(rounds[i - 1], match, 1)" style="color: gray;">Оберіть
+                                    переможця</a>
+                            </li>
+
+                            <li class="game game-spacer">&nbsp;</li>
+
+                            <li *ngIf="i === 0 && match?.player2 === null" class="game game-bottom">
+                                BYE<span></span></li>
+                            <li *ngIf="i === 0 && match?.player2 !== null" class="game game-bottom" [ngClass]="{'winner': match?.player2Id === match?.winnerId}">
+                                <a class="winner-button" [ngClass]="{'winner': match?.player2Id === match?.winnerId}" mat-button target="_blank">{{match?.player2?.name}}
+                                    {{match?.player2?.surname}}</a><span *ngIf="match?.player2Id === match?.winnerId">{{match?.score}}</span>
+                            </li>
+                            <li *ngIf="i !== 0" class="game game-bottom" [ngClass]="{'winner': match?.player2Id === match?.winnerId}">
+                                <a *ngIf="match?.player2 !== null" class="winner-button" [ngClass]="{'winner': match?.player2Id === match?.winnerId}" mat-button
+                                    target="_blank">{{match?.player2?.name}}
+                                    {{match?.player2?.surname}}</a><span *ngIf="match?.player2Id === match?.winnerId">{{match?.score}}</span>
+                                <a *ngIf="match?.player2 === null" class="winner-button" mat-button target="_blank"
+                                    (click)="openSetWinnerSheet(rounds[i - 1], match, 2)" style="color: gray;">Оберіть переможця</a>
+                            </li>
+                        </ng-container>
+                        <li class="spacer">&nbsp;</li>
+                    </ul>
+                </ng-container>
+            </main>
+        </div>
+
+        <div *ngIf="showSpinner" class="spinner">
+            <mat-progress-spinner [mode]="spinnerMode" color="accent">
+            </mat-progress-spinner>
+        </div>
+    </div>
+</div>

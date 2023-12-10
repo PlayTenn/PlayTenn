@@ -1,0 +1,47 @@
+<div class="places">
+ <mat-toolbar class="toolbar" color="primary" *ngIf="isAdmin">
+  <button mat-icon-button (click)="openAddNewPlaceDialog()" matTooltip="Додати" matTooltipPosition="below">
+   <mat-icon>add_circle_outline</mat-icon>
+  </button>
+  <div>
+   <span class="total-places">Всього: {{getPlacesCount()}}</span>
+  </div>
+ </mat-toolbar>
+ <div class="places-details">
+  <mat-accordion multi *ngIf="!showSpinner">
+   <mat-expansion-panel class="place-expander" (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+    *ngFor="let place of places">
+    <mat-expansion-panel-header>
+     <mat-panel-title>
+      {{place?.name}}
+      <mat-chip class="surface-chip-wrapper" matTooltip="Покриття" matTooltipPosition="below">
+       <div class="surface-chip-content">
+        <mat-icon>waves</mat-icon>
+        <span>{{getSurfaceType(place?.surfaceId)}}</span>
+       </div>
+      </mat-chip>
+     </mat-panel-title>
+     <button mat-icon-button (click)="$event.stopPropagation(); deletePlace(place)" matTooltip="Delete" *ngIf="isAdmin"
+      matTooltipPosition="below">
+      <mat-icon color="warn">delete</mat-icon>
+     </button>
+     <button mat-icon-button (click)="editPlace(place)" matTooltip="Edit" matTooltipPosition="below" *ngIf="isAdmin">
+      <mat-icon>mode_edit</mat-icon>
+     </button>
+    </mat-expansion-panel-header>
+    <mat-card class="place">
+     <mat-card-content>
+      <mat-icon>place</mat-icon>
+      {{place?.streetAddress}}
+     </mat-card-content>
+     <img mat-card-image class="photo" src="{{getImageUrl(place)}}">
+    </mat-card>
+   </mat-expansion-panel>
+  </mat-accordion>
+
+  <div *ngIf="showSpinner" class="spinner">
+   <mat-progress-spinner [mode]="spinnerMode" color="accent">
+   </mat-progress-spinner>
+  </div>
+ </div>
+</div>

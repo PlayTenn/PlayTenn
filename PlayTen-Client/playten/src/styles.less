@@ -1,0 +1,39 @@
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+html {
+ position: relative;
+ min-height: 100%;
+}
+
+body {
+ margin: 0;
+ user-select: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+ width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+ background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+ background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb {
+ background: #69f0ae;
+}
+
+.mat-mdc-snack-bar-container {
+ &.snackbar-color {
+   --mdc-snackbar-container-color: #7b1fa2;
+   --mat-mdc-snack-bar-button-color: #f44336;
+   --mdc-snackbar-supporting-text-color: #69f0ae;
+ }
+}

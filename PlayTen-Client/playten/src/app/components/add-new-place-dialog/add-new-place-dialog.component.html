@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Додайте нову локацію</h1>
+<div class="new-place-dialog" *ngIf="!showSpinner">
+  <form [formGroup]="place" class="new-place-content" mat-dialog-content>
+    <p>Заповніть дані про нову локацію</p>
+    <mat-form-field appearance="outline">
+      <mat-label>Назва</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Адреса</mat-label>
+      <input matInput formControlName="street">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Покриття</mat-label>
+      <mat-select formControlName="surfaceId">
+       <mat-option *ngFor="let surface of surfaces" [value]="surface.id">{{surface.type}}</mat-option>
+      </mat-select>
+     </mat-form-field>
+  </form>
+  <div class="new-place-dialog-buttons" mat-dialog-actions>
+    <button mat-button color="warn" (click)="cancelClick()">Відмінити</button>
+    <button mat-flat-button cdkFocusInitial color="primary" (click)="createNewPlace()">Створити</button>
+  </div>
+</div>
+<div *ngIf="showSpinner" class="spinner">
+  <mat-progress-spinner [mode]="spinnerMode">
+  </mat-progress-spinner>
+</div>

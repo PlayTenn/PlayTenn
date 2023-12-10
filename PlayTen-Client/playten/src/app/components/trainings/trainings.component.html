@@ -1,0 +1,80 @@
+<div class="trainings">
+ <div class="trainings-details">
+  <div class="header">
+   <mat-toolbar color="primary" class="toolbar">
+    <button mat-icon-button matTooltip="Додати нове тренування" (click)="openAddNewTrainingDialog()"
+     matTooltipPosition="below">
+     <mat-icon>add_circle_outline</mat-icon>
+    </button>
+    <div>
+     <span class="total-trainings">Всього: {{trainingsCount}}</span>
+    </div>
+   </mat-toolbar>
+  </div>
+  <div class="training-card">
+   <mat-card class="training" *ngFor="let training of trainings">
+    <mat-card-header class="training-header">
+     <mat-card-title>{{training?.training?.name}}</mat-card-title>
+     <mat-card-actions class="actions">
+      <div>
+       <button mat-icon-button (click)="$event.stopPropagation(); deleteTraining(training?.training?.trainingId)" matTooltip="Видалити" matTooltipPosition="below" *ngIf="training?.isUserTrainingOwner || isAdmin">
+        <mat-icon color="warn">delete</mat-icon>
+       </button>
+       <button mat-icon-button matTooltip="Редагувати" matTooltipPosition="below" *ngIf="training?.isUserTrainingOwner || isAdmin">
+        <mat-icon>mode_edit</mat-icon>
+       </button>
+      </div>
+     </mat-card-actions>
+    </mat-card-header>
+    <mat-divider class="divider"></mat-divider>
+    <mat-card-content class="training-info">
+     <div class="description">
+      <mat-icon>description</mat-icon>
+      Опис: {{training?.training?.description}}
+     </div>
+     <div class="place">
+      <mat-icon>place</mat-icon>
+      Місце проведення: {{training?.training?.place?.name}}, {{training?.training?.place?.streetAddress}} - {{getSurfaceType(training?.training?.place?.surfaceId)}}
+     </div>
+     <div class="start-date">
+      <mat-icon>date_range</mat-icon>
+      Дата початку: {{training?.training?.dateStart | date: 'dd/MM/yyyy HH:mm'}}
+     </div>
+     <div class="end-date">
+      <mat-icon>access_time</mat-icon>
+      Час завершення: {{training?.training?.dateEnd | date: 'HH:mm'}}
+     </div>
+     <div class="has-balls">
+      <mat-icon>sports_baseball</mat-icon>
+      {{training?.training?.hasBalls ? "М'ячі є" : "М'ячів немає"}}
+     </div>
+     <div class="number-of-participants">
+      <mat-icon>people</mat-icon>
+      Кількість учасників: {{training?.training?.numberOfParticipants}}
+     </div>
+    </mat-card-content>
+    <mat-divider class="divider"></mat-divider>
+    <mat-card-actions class="actions">
+     <div *ngIf="!training?.isUserTrainingOwner">
+      <button mat-icon-button (click)="$event.stopPropagation(); openSubscribeDialog(training?.training?.trainingId)" matTooltip="Долучитись" matTooltipPosition="below">
+       <mat-icon>person_add</mat-icon>
+      </button>
+      <button mat-icon-button matTooltip="Відмовитись" (click)="$event.stopPropagation(); openUnsubscribeDialog(training?.training?.trainingId)" matTooltipPosition="below">
+       <mat-icon>person_remove</mat-icon>
+      </button>
+     </div>
+     <div>
+      <button mat-icon-button matTooltip="Деталі" matTooltipPosition="below" (click)="openDetailsDialog(training?.training?.trainingId)">
+       <mat-icon>info</mat-icon>
+      </button>
+     </div>
+    </mat-card-actions>
+   </mat-card>
+  </div>
+
+  <div *ngIf="showSpinner" class="spinner">
+   <mat-progress-spinner [mode]="spinnerMode" color="accent">
+   </mat-progress-spinner>
+  </div>
+ </div>
+</div>

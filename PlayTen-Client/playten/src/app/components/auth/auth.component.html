@@ -1,0 +1,71 @@
+<div class="auth-wrapper">
+  <div class="auth">
+    <div *ngIf="!showSignUpForm && showSignInForm">
+      <form class="signin-form" [formGroup]="signIn">
+        <mat-form-field class="signin-field" color="primary">
+          <mat-label>Пошта</mat-label>
+          <input matInput formControlName="email">
+        </mat-form-field>
+        <mat-form-field class="signin-field" color="primary">
+          <mat-label>Пароль</mat-label>
+          <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'">
+        </mat-form-field>
+      </form>
+
+      <div class="signin-buttons">
+        <button class="signin-button" mat-raised-button color="primary" (click)="signInOnClick()"
+          [disabled]="isSignInButtonDisabled">Увійти</button>
+        <a mat-button color="primary" class="dont-have-account-button" (click)="onClickHandle('signup')">Ще не маєте
+          акаунту? Зареєструватись</a>
+      </div>
+    </div>
+
+    <div *ngIf="showSignUpForm && !showSignInForm">
+      <form class="signup-form" [formGroup]="signUp">
+        <mat-form-field class="signup-field" color="primary" style="-webkit-text-fill-color: #7b1fa2">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email">
+        </mat-form-field>
+        <mat-form-field class="signup-field" color="primary" style="-webkit-text-fill-color: #7b1fa2">
+          <mat-label>Ім'я</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+        <mat-form-field class="signup-field" color="primary" style="-webkit-text-fill-color: #7b1fa2">
+          <mat-label>Прізвище</mat-label>
+          <input matInput formControlName="surname" >
+        </mat-form-field>
+        <mat-form-field class="signup-field" color="primary" style="-webkit-text-fill-color: #7b1fa2">
+          <mat-label>Рівень гри</mat-label>
+          <mat-select matNativeControl formControlName="tennisLevel" required>
+            <mat-option *ngFor="let tennisLevel of tennisLevels"
+              [value]="tennisLevel.id">{{tennisLevel.level}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="signup-field" color="primary" style="-webkit-text-fill-color: #7b1fa2">
+          <mat-label>Як зв'язатись</mat-label>
+          <textarea matInput formControlName="howToConnect"></textarea>
+        </mat-form-field>
+        <mat-form-field class="signup-field" color="primary" style="-webkit-text-fill-color: #7b1fa2">
+          <mat-label>Пароль</mat-label>
+          <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'">
+        </mat-form-field>
+        <mat-form-field class="signup-field" color="primary" style="-webkit-text-fill-color: #7b1fa2">
+          <mat-label>Підтверження паролю</mat-label>
+          <input matInput formControlName="confirmPassword" [type]="hidePassword ? 'password' : 'text'">
+        </mat-form-field>
+      </form>
+
+      <div class="signup-buttons">
+        <button class="signup-button" mat-raised-button color="primary" (click)="signUpOnClick()"
+          [disabled]="isSignUpButtonDisabled">Sign up</button>
+        <a mat-button color="primary" class="already-have-account-button" (click)="onClickHandle('signin')">Already have
+          account? Sign in</a>
+      </div>
+    </div>
+
+    <div *ngIf="showSpinner" class="spinner">
+      <mat-progress-spinner [mode]="spinnerMode">
+      </mat-progress-spinner>
+    </div>
+  </div>
+</div>

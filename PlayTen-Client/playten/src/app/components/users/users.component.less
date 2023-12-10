@@ -1,0 +1,71 @@
+.users {
+ width: 100%;
+ height: 85vh;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+
+ .users-details {
+  width: 95%;
+  height: 95%;
+  background: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  padding: 15px 15px 15px 15px;
+  box-shadow: 1px 4px 10px grey;
+  background-color: #7b1fa2;
+
+  .spinner {
+   display: flex;
+   justify-content: center;
+   height: 80vh;
+   align-items: center;
+  }
+
+  .user-expander {
+   background: #69f0ae;
+   margin-bottom: 10px;
+   width: 100%;
+   min-width: 100%;
+
+   .user {
+    background: #7b1fa2;
+   }
+
+   .tennis-level-chip-wrapper {
+    margin-left: 15px;
+    background-color: #7b1fa2;
+
+    .tennis-level-chip-content {
+     display: flex;
+     align-items: center;
+     width: 50px;
+     justify-content: space-between;
+     width: 100%;
+    }
+   }
+  }
+
+  .no-users {
+   width: 100%;
+   display: flex;
+
+   .no-users-text {
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h3 {
+     font-size: 20px;
+     color: #69f0ae;
+    }
+   }
+   
+   img {
+    width: 45%;
+   }
+  }
+ }
+}

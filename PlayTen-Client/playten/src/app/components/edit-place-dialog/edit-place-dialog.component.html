@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Create new place</h1>
+<div class="new-place-dialog">
+  <form [formGroup]="place" class="new-place-content" mat-dialog-content>
+  <p>Fill data about new place!</p>
+   <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name">
+   </mat-form-field>
+   <mat-form-field appearance="outline">
+    <mat-label>Address</mat-label>
+    <input matInput formControlName="street">
+   </mat-form-field>
+  </form>
+ <div class="new-place-dialog-buttons" mat-dialog-actions>
+  <button mat-button color="warn" (click)="cancelClick()">Cancel</button>
+  <button mat-button cdkFocusInitial color="primary">Create</button>
+ </div>
+</div>

@@ -1,0 +1,71 @@
+<mat-toolbar class="header" [ngClass]="hideHeader ? 'header-below' : 'header'" color="accent">
+  <mat-toolbar-row>
+    <img class="logo" src="../assets/playten-logo.png" [routerLink]="homePath" routerLinkActive="active">
+    <div class="header-buttons" *ngIf="isLoggedIn()">
+        <button class="places-button" mat-button color="primary" [routerLink]="placesPath" routerLinkActive="active">Локації
+          <mat-icon>location_on</mat-icon>
+        </button>
+        <button class="trainings-button" mat-button color="primary" [routerLink]="trainingsPath" routerLinkActive="active">Тренування
+          <mat-icon>sports_tennis</mat-icon>
+        </button>
+        <button class="tournaments-button" mat-button color="primary" [routerLink]="tournamentsPath" routerLinkActive="active">Турніри
+          <mat-icon>emoji_events</mat-icon>
+        </button>
+        <button *ngIf="isAdmin()" class="users-button" mat-button color="primary" [routerLink]="usersPath" routerLinkActive="active">Користувачі
+          <mat-icon>person</mat-icon>
+        </button>
+        <button class="users-button" mat-button color="primary" [routerLink]="calendarPath" routerLinkActive="active">Календар
+          <mat-icon>calendar_today</mat-icon>
+        </button>
+      </div>
+    <span class="spacer"></span>
+    <div class="signin" *ngIf="!isLoggedIn()">
+      <span class="signin-text">
+        Увійти
+      </span>
+      <button mat-icon-button [routerLink]="authPath" routerLinkActive="active" matTooltip="Увійти">
+        <mat-icon>login</mat-icon>
+      </button>
+    </div>
+    <div class="signout" *ngIf="isLoggedIn()" matBadge="8" matBadgePosition="before">
+      <div class="user-profile" >
+          <div class="user-tag" mat-button [matMenuTriggerFor]="menu">
+            <div>
+              <img mat-card-image *ngIf="getUser().profileImageUrl" src="{{getUser().profileImageUrl}}">
+              <img mat-card-image src="../../../assets/default-avatar.png" *ngIf="!getUser().profileImageUrl" class="default-avatar">
+            </div>
+            <div class="user-info">
+              <span>
+                {{getUser().name}} {{getUser().surname}}
+              </span>
+              <span class="user-email">{{getUser().email}}</span>
+            </div>
+            <mat-icon class="expand-arrow">keyboard_arrow_down</mat-icon>
+          </div>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
+
+<mat-toolbar class="footer" color="accent">
+  <mat-toolbar-row class="footer-content">
+    <span>PlayTen {{currentDate}}</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu" class="menu" xPosition="after">
+  <button mat-menu-item (click)="goToProfile(false)">
+    <mat-icon>person</mat-icon>
+    Профіль
+  </button>
+  <button mat-menu-item (click)="goToProfile(true)">
+    <mat-icon>settings</mat-icon>
+    Налаштування
+  </button>
+  <button mat-menu-item (click)="logOut()">
+    <mat-icon color="warn">logout</mat-icon>
+    Вийти
+  </button>
+</mat-menu>

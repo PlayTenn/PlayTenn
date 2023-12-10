@@ -1,0 +1,112 @@
+.header-below {
+    z-index: -1 !important;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    line-height: 60px;
+    box-shadow: 0px 0px 10px grey;
+    display: flex;
+    align-items: center;
+    z-index: 999;
+
+    .header-buttons {
+        height: 100%;
+
+        .places-button,
+        .users-button,
+        .trainings-button,
+        .tournaments-button {
+            height: 100%;
+        }
+    }
+
+    .logo {
+        width: 150px;
+        height: 40px;
+        user-select: none;
+    }
+
+    .logo:hover {
+        cursor: pointer;
+    }
+
+    .spacer {
+        flex: 1 1 auto;
+    }
+
+    .signin,
+    .signout {
+        display: flex;
+        align-items: center;
+
+        .user-profile,
+        .user-tag,
+        .signin-text {
+            font-size: medium;
+        }
+
+        .user-tag:hover {
+            cursor: pointer;
+
+            .expand-arrow {
+                color: #69f0ae;
+            }
+        }
+
+        .user-tag {
+            max-width: 100%;
+            min-height: 20px;
+            padding: 5px;
+            background-color: #7b1fa2;
+            border-radius: 7px;
+            line-height: 14px;
+            user-select: none;
+            color: white;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .user-info {
+                display: flex;
+                flex-direction: column;
+            }
+
+            img {
+                height: 30px;
+                width: 30px;
+                margin-right: 5px;
+                border-radius: 15px;
+            }
+
+            .user-email {
+                font-size: 12px;
+                color: #69f0ae;
+            }
+        }
+    }
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0px 0px 10px grey;
+    min-height: 35px !important;
+    height: 35px !important;
+    line-height: 35px;
+
+    .footer-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #7b1fa2;
+        font-size: medium;
+    }
+}
+
+::ng-deep .menu {
+    background-color: #7b1fa2;
+}

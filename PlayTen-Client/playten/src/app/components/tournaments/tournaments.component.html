@@ -1,0 +1,97 @@
+<div class="tournaments">
+    <div class="tournaments-details">
+        <div class="header">
+            <mat-toolbar color="primary" class="toolbar">
+                <button mat-button type="primary" (click)="openAddNewTournamentDialog()" matTooltipPosition="below">
+                    <mat-icon>add_circle_outline</mat-icon>
+                </button>
+                <div>
+                    <span class="total-tournaments">Всього: {{tournamentsCount}}</span>
+                </div>
+            </mat-toolbar>
+        </div>
+        <div class="tournament-card">
+            <mat-card class="tournament" *ngFor="let tournament of tournaments">
+                <mat-card-header class="tournament-header">
+                    <mat-card-title>{{tournament?.tournament?.name}}</mat-card-title>
+                    <mat-card-actions class="actions">
+                        <div>
+                            <button mat-icon-button
+                                (click)="$event.stopPropagation(); deleteTournament(tournament?.tournament?.tournamentId)"
+                                matTooltip="Видалити" matTooltipPosition="below"
+                                *ngIf="tournament?.isUserTournamentOwner || isAdmin">
+                                <mat-icon color="warn">delete</mat-icon>
+                            </button>
+                            <button mat-icon-button matTooltip="Редагувати" matTooltipPosition="below"
+                                *ngIf="tournament?.isUserTournamentOwner || isAdmin">
+                                <mat-icon>mode_edit</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card-actions>
+                </mat-card-header>
+                <mat-divider class="divider"></mat-divider>
+                <mat-card-content class="tournament-info">
+                    <div class="description">
+                        <mat-icon>description</mat-icon>
+                        Опис: {{tournament?.tournament?.description}}
+                    </div>
+                    <div class="place">
+                        <mat-icon>place</mat-icon>
+                        Місце проведення: {{tournament?.tournament?.place?.name}},
+                        {{tournament?.tournament?.place?.streetAddress}} -
+                        {{getSurfaceType(tournament?.tournament?.place?.surfaceId)}}
+                    </div>
+                    <div class="start-date">
+                        <mat-icon>date_range</mat-icon>
+                        Дата початку: {{tournament?.tournament?.dateStart | date: 'dd/MM/yyyy'}}
+                    </div>
+                    <div class="end-date">
+                        <mat-icon>date_range</mat-icon>
+                        Дата завершення: {{tournament?.tournament?.dateEnd | date: 'dd/MM/yyyy'}}
+                    </div>
+                    <div class="price">
+                        <mat-icon>attach_money</mat-icon>
+                        Внесок: {{tournament?.tournament?.price}}
+                    </div>
+                    <div class="number-of-participants">
+                        <mat-icon>people</mat-icon>
+                        Кількість учасників: {{tournament?.tournament?.participants?.length}} /
+                        {{tournament?.tournament?.numberOfParticipants}}
+                    </div>
+                </mat-card-content>
+                <mat-divider class="divider"></mat-divider>
+                <mat-card-actions class="actions">
+                    <div *ngIf="!tournament?.isUserTournamentOwner">
+                        <button mat-icon-button
+                            (click)="$event.stopPropagation(); openSubscribeDialog(tournament?.tournament?.tournamentId)"
+                            matTooltip="Долучитись" matTooltipPosition="below">
+                            <mat-icon>person_add</mat-icon>
+                        </button>
+                        <button mat-icon-button matTooltip="Відмовитись"
+                            (click)="$event.stopPropagation(); openUnsubscribeDialog(tournament?.tournament?.tournamentId)"
+                            matTooltipPosition="below">
+                            <mat-icon>person_remove</mat-icon>
+                        </button>
+                    </div>
+                    <div>
+                        <button mat-icon-button matTooltip="Деталі" matTooltipPosition="below"
+                            (click)="goToDetails(tournament?.tournament?.tournamentId)">
+                            <mat-icon>info</mat-icon>
+                        </button>
+                        <button *ngIf="tournament?.tournament?.finished || !tournament?.tournament?.hasStarted" mat-icon-button matTooltip="Старт" matTooltipPosition="below"
+                            (click)="startTournament(tournament?.tournament?.tournamentId, tournament?.tournament?.participants)">
+                            <mat-icon>start</mat-icon>
+                        </button>
+                        <button *ngIf="tournament?.tournament?.hasStarted" mat-icon-button matTooltip="Фініш" matTooltipPosition="below"
+                            (click)="finishTournament(tournament?.tournament?.tournamentId)">
+                            <mat-icon>flag</mat-icon>
+                        </button>
+                    </div>
+                </mat-card-actions>
+            </mat-card>
+            <div *ngIf="showSpinner" class="spinner">
+                <mat-progress-spinner [mode]="spinnerMode" color="accent">
+                </mat-progress-spinner>
+            </div>
+        </div>
+    </div>
